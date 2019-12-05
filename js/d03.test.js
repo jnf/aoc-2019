@@ -115,7 +115,7 @@ describe("web examples", () => {
   test("with test input", (done) => {
     fs.readFile("./d03input", "utf8", (error, contents) => {
       const [wire1, wire2] = contents.split("\n").map(s => s.split(","))
-      const expectedDistance = 841 // too high
+      const expectedDistance = 258
 
       const closestIntersection = findClosest(findIntersections(traceWire(wire1), traceWire(wire2)))
       const manhattenDistance = closestIntersection.reduce((a, v) => a += Math.abs(v), 0)

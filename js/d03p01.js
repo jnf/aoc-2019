@@ -17,19 +17,19 @@ export const traceWire = (path=[]) => {
 }
 
 export const findIntersections = (grid1, grid2) => {
-  const gridObj = grid1.reduce((obj, [key, coordinate]) => {
-    obj[key] = obj[key] || []
-    obj[key].push(coordinate)
-    return obj
-  }, {})
+  const makeGridObj = (a, c) => { a[c] = true; return a }
+  const makeCoordinate = ([stringPair]) => stringPair.split(",").map(n => n * 1)
 
-  return grid2.filter(([key, coordinate]) => {
-    return (key !== 0 && coordinate !== 0) && gridObj[key] && gridObj[key].includes(coordinate)
-  })
+  const gridObj1 = grid1.reduce(makeGridObj)
+  const gridObj2 = grid2.reduce(makeGridObj)
+
+  return Object.entries(gridObj1) // grab the coordinate (strings now)
+    .filter(([c]) => gridObj2[c]) // select the keys that also appear in the other object
+    .map(makeCoordinate) // convert back into [x, y] numeric pairs
 }
 
 export const findClosest = intersections => {
   return intersections.sort(([x1, y1], [x2, y2]) =>
-    Math.abs(x1) + Math.abs(y1) < Math.abs(x2) + Math.abs(y2) ? -1 : 1
+    Math.abs(x1) + Math.abs(y1) <= Math.abs(x2) + Math.abs(y2) ? -1 : 1
   )[0]
 }
