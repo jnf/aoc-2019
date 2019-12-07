@@ -8,13 +8,13 @@ const multiply = ([v1, v2, dest], program) => {
   return program
 }
 
-const operations = {
+export const operations = {
   1: [add, 4],
   2: [multiply, 4],
   99: [n => n, 1]
 }
 
-const runIntcode = (program) => {
+export const runIntcode = (program) => {
   let pointer = 0
   while (pointer < program.length) {
     const opcode = program[pointer]
@@ -28,5 +28,3 @@ const runIntcode = (program) => {
 
   return program
 }
-
-export default runIntcode

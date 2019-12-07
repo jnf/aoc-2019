@@ -1,6 +1,6 @@
 import fs from "fs"
 
-import runIntcode from "./d02p01"
+import { runIntcode } from "./d02p01"
 
 describe("p1 day input", () => {
   test("reads input file and runs program", (done) => {
